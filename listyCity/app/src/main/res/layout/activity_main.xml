@@ -17,13 +17,23 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/city_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/confirm"
+        app:layout_constraintEnd_toEndOf="@+id/enter_city"
+        app:layout_constraintTop_toTopOf="@+id/enter_city" />
 
     <Button
         android:id="@+id/add_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="4dp"
         android:text="@string/add_city"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +53,7 @@
         android:id="@+id/city_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

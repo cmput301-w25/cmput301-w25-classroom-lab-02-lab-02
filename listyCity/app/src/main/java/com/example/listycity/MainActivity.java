@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button addCity = findViewById(R.id.add_city);
         Button deleteCity = findViewById(R.id.delete_city);
+        Button confirm = findViewById(R.id.confirm);
         EditText enterCity = findViewById(R.id.enter_city);
+
+        // initially, the confirm button is disabled
+        confirm.setEnabled(false);
 
         String[] cities = {"Edmonton", "Paris", "London"};
 
@@ -59,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 deleteCity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String removedCity = dataList.get(position);
+                        Toast.makeText(MainActivity.this,
+                                        removedCity + " deleted successfully!",
+                                        Toast.LENGTH_SHORT).show();
+                        // from lab demo 
                         dataList.remove(position);
                         cityAdapter.notifyDataSetChanged();
                     }
@@ -70,9 +80,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newCity = enterCity.getText().toString().trim();
+                if (!newCity.isEmpty()) {
+                    // confirm button is only enabled if the add city button is pressed
+                    confirm.setEnabled(true);
+                } else {
+                    Toast.makeText(MainActivity.this,
+                                    "Try Again",
+                                    Toast.LENGTH_SHORT).show();
+                    enterCity.setText("");
+                }
+            }
+        });
+
+        confirm.setOnClickListener(v -> {
+            String newCity = enterCity.getText().toString().trim();
+            if (!newCity.isEmpty()) {
                 // from lab demo
                 dataList.add(newCity);
                 cityAdapter.notifyDataSetChanged();
+                enterCity.setText("");
+
+                // display a confirmation message
+                Toast.makeText(MainActivity.this,
+                                newCity + " added successfully!",
+                                Toast.LENGTH_SHORT).show();
+                // disable the confirm button
+                confirm.setEnabled(false);
             }
         });
 
