@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         cityList = findViewById(R.id.city_list);
 
-        Button button = findViewById(R.id.button);
+        Button addCity = findViewById(R.id.add_city);
 
         String[] cities = {"Edmonton", "Paris", "London"};
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         cityAdapter = new ArrayAdapter<>(this, R.layout.content, dataList);
         cityList.setAdapter(cityAdapter);
 
+        // What does this do?
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -54,11 +56,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        addCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataList.add("Ottawa");
-                cityAdapter.notifyDataSetChanged();
+
+                // from lab demo
+                // dataList.add(newCity);
+                // cityAdapter.notifyDataSetChanged();
             }
         });
 
