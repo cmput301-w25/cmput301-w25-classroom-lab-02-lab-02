@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         cityList = findViewById(R.id.city_list);
 
         Button addCity = findViewById(R.id.add_city);
+        Button deleteCity = findViewById(R.id.delete_city);
+        EditText enterCity = findViewById(R.id.enter_city);
 
         String[] cities = {"Edmonton", "Paris", "London"};
 
@@ -48,21 +51,28 @@ public class MainActivity extends AppCompatActivity {
         cityAdapter = new ArrayAdapter<>(this, R.layout.content, dataList);
         cityList.setAdapter(cityAdapter);
 
-        // What does this do?
+        // whenever you click on a city in the city list, this gets activated
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                // position sets as the index of the city in the list
+                deleteCity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dataList.remove(position);
+                        cityAdapter.notifyDataSetChanged();
+                    }
+                });
             }
         });
 
         addCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String newCity = enterCity.getText().toString().trim();
                 // from lab demo
-                // dataList.add(newCity);
-                // cityAdapter.notifyDataSetChanged();
+                dataList.add(newCity);
+                cityAdapter.notifyDataSetChanged();
             }
         });
 
